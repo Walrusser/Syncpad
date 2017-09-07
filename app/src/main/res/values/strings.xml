@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Syncpad</string>
+    <string name="title_activity_list_meny">listMenyActivity</string>
+    <string name="title_activity_register">registerActivity</string>
+</resources>

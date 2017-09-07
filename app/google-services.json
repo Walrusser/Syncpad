@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "522501819156",
+    "firebase_url": "https://syncpad-29bdb.firebaseio.com",
+    "project_id": "syncpad-29bdb",
+    "storage_bucket": "syncpad-29bdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522501819156:android:aab0017d3c504676",
+        "android_client_info": {
+          "package_name": "com.nordstar.afehr.syncpad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522501819156-p5g9r8lpqhs6jp32pocp8vhk5b0if32l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nordstar.afehr.syncpad",
+            "certificate_hash": "e0d8e91554ba8025d7a860be5c085e935fae421c"
+          }
+        },
+        {
+          "client_id": "522501819156-63iaskqc53af9kj4dtf34noe22e67vip.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nordstar.afehr.syncpad",
+            "certificate_hash": "30518ba66339585fd80dea0b7155a45660660f18"
+          }
+        },
+        {
+          "client_id": "522501819156-a1pj251p6fa1a30b277d2t1jpfkc9mtn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMEgc9aUixkfIbg3BHXC7Jm64cdrtfBag"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522501819156-a1pj251p6fa1a30b277d2t1jpfkc9mtn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
