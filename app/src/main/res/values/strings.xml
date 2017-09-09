@@ -2,4 +2,11 @@
     <string name="app_name">Syncpad</string>
     <string name="title_activity_list_meny">listMenyActivity</string>
     <string name="title_activity_register">registerActivity</string>
+    <string name="setTitleString">Set title: </string>
+    <string name="negative_button">Cancel</string>
+    <string name="ok_button">OK</string>
+    <string name="deleteTitleString">Are you sure?</string>
+    <string name="deleteMessage">Do you really want to delete this note? This action will be permanent!</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
 </resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="main_onLongClick_options_choises">
+        <item>Rename</item>
+        <item>Move</item>
+        <item>Delete</item>
+    </string-array>
+</resources>

@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,8 +33,8 @@ public class mainActivity extends AppCompatActivity {
 
     private String uid;
     private String title;
-    private ArrayList<String> contentIds = new ArrayList<String>();
 
+    private ArrayList<String> contentIds = new ArrayList<String>();
     private ArrayList<note> dataset = new ArrayList<note>();
 
     private ListView listView;
@@ -50,8 +49,6 @@ public class mainActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         setContentView(R.layout.main_activity);
-
-        //TODO Add toolbar with logout and settings
 
         //TODO Make the ui an encoded version of the email
         String email = auth.getCurrentUser().getEmail();
@@ -84,7 +81,7 @@ public class mainActivity extends AppCompatActivity {
 
                 builder.setView(inputText);
 
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.ok_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         title = inputText.getText().toString();
@@ -93,11 +90,10 @@ public class mainActivity extends AppCompatActivity {
                         mDatabase.child("content").child(unID).child("title").setValue(title); //Create the content
                         mDatabase.child("content").child(unID).child("content").setValue(""); //Create a blank content child
                         mDatabase.child("users").child(uid).child("content").child(unID).setValue(true); //Add the content to the user and set owner to true
-                        Log.d("Test", "test");
                     }
                 });
 
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.negative_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();
@@ -109,11 +105,76 @@ public class mainActivity extends AppCompatActivity {
             }
         });
 
-        listView.setOnLongClickListener(new View.OnLongClickListener() {
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-                //TODO Create toast
-                return false;
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity.this);
+
+                builder.setTitle("Options")
+                        .setItems(R.array.main_onLongClick_options_choises, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity.this);
+
+                                switch (i){
+                                    //Rename
+                                    case 0:
+                                        builder.setTitle(R.string.setTitleString);
+
+                                        final EditText inputText = new EditText(mainActivity.this);
+                                        inputText.setInputType(InputType.TYPE_CLASS_TEXT);
+                                        builder.setView(inputText);
+
+                                        builder.setPositiveButton(R.string.ok_button, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //TODO Rename in database
+                                            }
+                                        });
+
+                                        builder.setNegativeButton(R.string.negative_button, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+                                            }
+                                        });
+
+                                        builder.show();
+                                        break;
+
+                                    //Move
+                                    case 1:
+                                        //TODO Implement folders
+                                        break;
+
+                                    //Delete
+                                    case 2:
+                                        builder.setTitle(R.string.deleteTitleString)
+                                                .setMessage(R.string.deleteMessage);
+
+                                        builder.setPositiveButton(R.string.yes_button, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //TODO Delete from database
+                                            }
+                                        });
+
+                                        builder.setNegativeButton(R.string.no_button, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+                                            }
+                                        });
+
+                                        builder.show();
+                                        break;
+                                }
+                            }
+                        });
+
+                builder.show();
+
+                return true;
             }
         });
 
