@@ -96,7 +96,7 @@ public class editorActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.settings:
-                //TODO Switch to the settings
+                startActivity(new Intent(editorActivity.this, settingsActivity.class));
                 return true;
 
             case R.id.people:

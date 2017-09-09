@@ -1,9 +1,6 @@
 package com.nordstar.afehr.syncpad;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Alexander Fehr on 2017-08-06.
@@ -23,7 +19,7 @@ public class mNoteAdapter extends ArrayAdapter<note> {
     private Context context;
 
     public mNoteAdapter(ArrayList<note> _dataset, Context _context) {
-        super(_context, R.layout.row_layout, _dataset);
+        super(_context, R.layout.main_row_layout, _dataset);
 
         dataset = _dataset;
         context = _context;
@@ -42,7 +38,7 @@ public class mNoteAdapter extends ArrayAdapter<note> {
 
         if(convertView==null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            v = inflater.inflate(R.layout.row_layout, null);
+            v = inflater.inflate(R.layout.main_row_layout, null);
         }
 
         TextView title = (TextView) v.findViewById(R.id.titleTextView);

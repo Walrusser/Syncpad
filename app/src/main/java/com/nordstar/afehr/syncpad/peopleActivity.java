@@ -8,23 +8,25 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class peopleActivity extends AppCompatActivity {
 
     private String id;
     private Toolbar toolbar;
+    private ListView listView;
 
     private DatabaseReference mDataBase;
 
     private FloatingActionButton floatingActionButton;
     private EditText emailEditText;
+
+    private ArrayList<user> userArrayList = new ArrayList<user>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +43,30 @@ public class peopleActivity extends AppCompatActivity {
         toolbar.setTitle("People");
 
         floatingActionButton = (FloatingActionButton) findViewById(R.id.peopleFloatActionButton);
+        listView = (ListView) findViewById(R.id.peopleListView);
         emailEditText = (EditText) findViewById(R.id.targetEmailEditText);
+
+        listView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                return false;
+            }
+        });
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String targetUserId = Base64.encodeToString(emailEditText.getText().toString().getBytes(), Base64.DEFAULT).replaceAll("\n", "");
 
+                //TODO Check if user exists before adding
+                userArrayList.add(new user("Test", emailEditText.getText().toString()));
                 mDataBase.child("users").child(targetUserId).child("content").child(id).setValue(false);
-                //TODO Make sure that the target user exists
+                listView.invalidateViews();
             }
         });
+
+
+        mUserAdapter userAdapter = new mUserAdapter(userArrayList, this);
+        listView.setAdapter(userAdapter);
     }
 }

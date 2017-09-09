@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -61,7 +60,7 @@ public class mainActivity extends AppCompatActivity {
         uid = base64Email.replaceAll("\n", "");
 
 
-        listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.peopleListView);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -107,6 +106,14 @@ public class mainActivity extends AppCompatActivity {
 
                 builder.show();
                 listView.invalidateViews();
+            }
+        });
+
+        listView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                //TODO Create toast
+                return false;
             }
         });
 
@@ -158,7 +165,7 @@ public class mainActivity extends AppCompatActivity {
         switch (item.getItemId()){
 
             case R.id.settings:
-                //TODO Switch to the settings menu
+                startActivity(new Intent(mainActivity.this, settingsActivity.class));
                 return true;
 
             case R.id.logout:
