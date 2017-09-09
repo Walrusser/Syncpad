@@ -23,7 +23,8 @@
             android:name=".registerActivity"
             android:label="@string/title_activity_register" />
         <activity android:name=".editorActivity" />
-        <activity android:name=".peopleActivity"></activity>
+        <activity android:name=".peopleActivity" />
+        <activity android:name=".settingsActivity"></activity>
     </application>
 
 </manifest>

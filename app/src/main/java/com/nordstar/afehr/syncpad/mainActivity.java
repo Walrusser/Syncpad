@@ -9,7 +9,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -51,8 +54,12 @@ public class mainActivity extends AppCompatActivity {
 
         //TODO Add toolbar with logout and settings
 
-        //Get the uid
-        uid = auth.getCurrentUser().getUid();
+        //TODO Make the ui an encoded version of the email
+        String email = auth.getCurrentUser().getEmail();
+
+        String base64Email = Base64.encodeToString(email.getBytes(), Base64.DEFAULT);
+        uid = base64Email.replaceAll("\n", "");
+
 
         listView = (ListView) findViewById(R.id.listView);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
@@ -87,6 +94,7 @@ public class mainActivity extends AppCompatActivity {
                         mDatabase.child("content").child(unID).child("title").setValue(title); //Create the content
                         mDatabase.child("content").child(unID).child("content").setValue(""); //Create a blank content child
                         mDatabase.child("users").child(uid).child("content").child(unID).setValue(true); //Add the content to the user and set owner to true
+                        Log.d("Test", "test");
                     }
                 });
 
@@ -116,6 +124,7 @@ public class mainActivity extends AppCompatActivity {
             }
         });
 
+        //TODO Split up the valueEventListener to use less download
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -142,6 +151,30 @@ public class mainActivity extends AppCompatActivity {
         mNoteAdapter noteAdapter = new mNoteAdapter(dataset, this);
         listView.setAdapter(noteAdapter);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+
+            case R.id.settings:
+                //TODO Switch to the settings menu
+                return true;
+
+            case R.id.logout:
+                auth.signOut();
+                startActivity(new Intent(mainActivity.this, loginActivity.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        return true;
     }
 
 }

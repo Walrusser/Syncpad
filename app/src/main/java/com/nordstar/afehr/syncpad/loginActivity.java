@@ -35,7 +35,7 @@ public class loginActivity extends Activity {
             startActivity(new Intent(loginActivity.this, mainActivity.class));
         }
 
-        //TODO Add remember me function
+        //TODO Add remember me function?
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.login_activity);

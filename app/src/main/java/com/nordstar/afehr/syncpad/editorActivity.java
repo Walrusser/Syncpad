@@ -95,8 +95,8 @@ public class editorActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.more:
-
+            case R.id.settings:
+                //TODO Switch to the settings
                 return true;
 
             case R.id.people:
